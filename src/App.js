@@ -9,7 +9,7 @@ import {
 // Usamos la Context API de React para gestionar la sesion del usuario
 import { UserContextProvider, UserContext } from "./context/UserContext";
 
-import { Home, Login, Products, Users } from "./pages";
+import { Home, Login, Products, Clients } from "./pages";
 import { Navbar } from "./components/Navbar";
 
 // La diferencia entre la ruta privada y la ruta 'Auth' es la redireccion
@@ -32,7 +32,7 @@ export default function App() {
   return (
     <UserContextProvider>
       <Router>
-        <div className="">
+        <div className="bg-gray-100 min-h-screen">
           {/* Content Container */}
           <div className="">
             <Switch>
@@ -43,10 +43,10 @@ export default function App() {
                 </ContentContainer>
               </PrivatedRoute>
 
-              <PrivatedRoute path="/users">
+              <PrivatedRoute path="/clients">
                 <Navbar />
                 <ContentContainer>
-                  <Users />
+                  <Clients />
                 </ContentContainer>
               </PrivatedRoute>
 

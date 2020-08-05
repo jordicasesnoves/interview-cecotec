@@ -1,0 +1,49 @@
+{
+  "clients": [
+    {
+      "id": 1,
+      "dni": "20426099X",
+      "name": "Jordi Casesnoves",
+      "phone": "666222333",
+      "email": "jordicasesnoves@gmail.com",
+      "status": "active",
+      "points": 310
+    },
+    {
+      "id": 2,
+      "dni": "20426339X",
+      "name": "Jorge Ballester",
+      "phone": "666455678",
+      "email": "jorgeballester@gmail.com",
+      "status": "active",
+      "points": 100
+    },
+    {
+      "id": 3,
+      "dni": "20421199X",
+      "name": "Elena Garcia",
+      "phone": "666111342",
+      "email": "elenagarcia@gmail.com",
+      "status": "active",
+      "points": 0
+    },
+    {
+      "id": 4,
+      "dni": "test",
+      "name": "test",
+      "phone": "test",
+      "email": "test",
+      "points": 0,
+      "status": "active"
+    },
+    {
+      "id": 5,
+      "dni": "dsadsad",
+      "name": "sadsadsadsa",
+      "phone": "dasdsad",
+      "email": "asdsada",
+      "points": 0,
+      "status": "active"
+    }
+  ]
+}

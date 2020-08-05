@@ -2,6 +2,6 @@
 import { Home } from "./Home";
 import { Login } from "./Login";
 import { Products } from "./Products";
-import { Users } from "./Users";
+import { Clients } from "./Clients";
 
-export { Home, Login, Products, Users };
+export { Home, Login, Products, Clients };

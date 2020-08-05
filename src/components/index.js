@@ -1,5 +1,5 @@
 import { Button } from "./Button";
-import { Icon } from "./Icon";
 import { Navbar } from "./Navbar";
+import { AddClientModal } from "./AddClientModal";
 
-export { Button, Icon, Navbar };
+export { Button, AddClientModal, Navbar };
