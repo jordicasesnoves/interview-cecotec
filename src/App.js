@@ -23,28 +23,38 @@ const AuthRoute = ({ ...props }) => {
   return state.loggedIn ? <Redirect to="/" /> : <Route {...props} />;
 };
 
+const ContentContainer = (props) => {
+  return <div className="max-w-6xl mx-auto py-12">{props.children}</div>;
+};
+
 // Si el usuario no esta logeado, solo puede acceder a /login
 export default function App() {
   return (
     <UserContextProvider>
       <Router>
-        <div className="bg-gray-100">
+        <div className="">
           {/* Content Container */}
           <div className="">
             <Switch>
               <PrivatedRoute exact path="/">
                 <Navbar />
-                <Home />
+                <ContentContainer>
+                  <Home />
+                </ContentContainer>
               </PrivatedRoute>
 
               <PrivatedRoute path="/users">
                 <Navbar />
-                <Users />
+                <ContentContainer>
+                  <Users />
+                </ContentContainer>
               </PrivatedRoute>
 
               <PrivatedRoute path="/products">
                 <Navbar />
-                <Products />
+                <ContentContainer>
+                  <Products />
+                </ContentContainer>
               </PrivatedRoute>
 
               <AuthRoute exact path="/login" component={Login} />

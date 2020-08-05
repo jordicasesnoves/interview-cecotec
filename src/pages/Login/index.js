@@ -1,34 +1,33 @@
-import React, { useContext, useState } from "react";
-import { useHistory, Link } from "react-router-dom";
-import { UserContext } from "../../context/UserContext";
-
+import React, { useContext, useState, useEffect } from "react";
 import { Button } from "../../components";
+import { useLogin } from "../../hooks/useLogin";
 
 export const Login = () => {
-  const { state, setState } = useContext(UserContext);
-  const history = useHistory();
-
-  const [value, setValue] = useState({
-    emailValue: "",
-    passwordValue: "",
+  const [values, setValues] = useState({
+    emailValue: "test@cecotec.com",
+    passwordValue: "c3c0t3c",
   });
 
-  const [loading, setLoading] = useState(false);
+  // Usamos nuestro custom Hook 'useLogin' para organizar mejor el codigo
+  const [login, loading, error] = useLogin(values);
 
   const submitForm = (e) => {
     e.preventDefault();
-    setLoading(true);
-
-    // Prevent for submitting more than once
+    // Prevenir que se haga un intento de login mientras se esta haciendo otro
     if (loading) return;
+    login();
   };
+
+  if (error) alert(error.message);
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div className="bg-gray-400 min-h-screen flex items-center justify-center">
       <div className="w-full max-w-md">
-        <h1 className="text-2xl font-bold my-4 text-center">Cecotec</h1>
+        <h1 className="text-4xl font-bold my-4 text-center text-gray-900">
+          Cecotec
+        </h1>
         <form
           onSubmit={(e) => {
-            //submitForm(e);
+            submitForm(e, values);
           }}
           className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
         >
@@ -45,9 +44,9 @@ export const Login = () => {
               id="email"
               type="email"
               placeholder="Email"
-              value={value.emailValue}
+              value={values.emailValue}
               onChange={(e) =>
-                setValue({ ...value, emailValue: e.target.value })
+                setValues({ ...values, emailValue: e.target.value })
               }
             />
           </div>
@@ -64,9 +63,9 @@ export const Login = () => {
               id="password"
               type="password"
               placeholder="******"
-              value={value.passwordValue}
+              value={values.passwordValue}
               onChange={(e) =>
-                setValue({ ...value, passwordValue: e.target.value })
+                setValues({ ...values, passwordValue: e.target.value })
               }
             />
           </div>
