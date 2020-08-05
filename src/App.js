@@ -7,25 +7,26 @@ import {
 } from "react-router-dom";
 
 // Usamos la Context API de React para gestionar la sesion del usuario
-import { ContextProvider, Context } from "./context/UserContext";
+import { UserContextProvider, UserContext } from "./context/UserContext";
 
 import { Home, Login, Products, Users } from "./pages";
 import { Navbar } from "./components/Navbar";
 
 // La diferencia entre la ruta privada y la ruta 'Auth' es la redireccion
 const PrivatedRoute = ({ ...props }) => {
-  const { state } = useContext(Context);
+  const { state } = useContext(UserContext);
   return state.loggedIn ? <Route {...props} /> : <Redirect to="/login" />;
 };
 
 const AuthRoute = ({ ...props }) => {
-  const { state } = useContext(Context);
+  const { state } = useContext(UserContext);
   return state.loggedIn ? <Redirect to="/" /> : <Route {...props} />;
 };
 
+// Si el usuario no esta logeado, solo puede acceder a /login
 export default function App() {
   return (
-    <ContextProvider>
+    <UserContextProvider>
       <Router>
         <div className="bg-gray-100">
           {/* Content Container */}
@@ -52,6 +53,6 @@ export default function App() {
           </div>
         </div>
       </Router>
-    </ContextProvider>
+    </UserContextProvider>
   );
 }

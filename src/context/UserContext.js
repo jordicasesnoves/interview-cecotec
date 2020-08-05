@@ -7,16 +7,16 @@ const initialState = {
   loggedIn: !!user,
 };
 
-const Context = React.createContext(initialState);
+const UserContext = React.createContext(initialState);
 
 // Creamos el componente ContextProvider, siguiendo asi uno de los patrones de la API
-const ContextProvider = (props) => {
+const UserContextProvider = (props) => {
   const [state, setState] = useState(initialState);
   return (
-    <Context.Provider value={{ state, setState }}>
+    <UserContext.Provider value={{ state, setState }}>
       {props.children}
-    </Context.Provider>
+    </UserContext.Provider>
   );
 };
 
-export { Context, ContextProvider };
+export { UserContext, UserContextProvider };
