@@ -96,7 +96,7 @@ export const Clients = () => {
                           {client.phone}
                         </div>
                         <div className="text-sm leading-5 text-gray-500">
-                          (Spanish phone)
+                          (Spain)
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
@@ -116,7 +116,7 @@ export const Clients = () => {
                         </a>
                         <a
                           onClick={() =>
-                            window.confirm(`Delete client ${client.id}?`)
+                            window.confirm(`Delete client '${client.name}'?`)
                               ? deleteClient(client.id)
                               : null
                           }

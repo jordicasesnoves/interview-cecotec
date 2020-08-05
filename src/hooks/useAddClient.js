@@ -19,8 +19,8 @@ export const useAddClient = () => {
       .then((data) => {
         clientsLength = data.length;
 
-        // Luego añadimos el id del nuevo cliente, el cual esta basado en el numero de clientes actuales
-        newClient = { id: clientsLength + 1, ...newClient };
+        // Luego añadimos el id del nuevo cliente, el cual esta basado en el momento en el que se crea
+        newClient = { id: new Date().getTime(), ...newClient };
 
         // Por ultimo realizamos la peticion POST para añadir el nuevo cliente
         fetch("http://localhost:3001/clients", {

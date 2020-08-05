@@ -3,16 +3,17 @@ import ReactDOM from "react-dom";
 import { Button } from "../Button";
 import { useAddClient } from "../../hooks/useAddClient";
 
+const initialValues = {
+  dni: "",
+  name: "",
+  phone: "",
+  email: "",
+  points: 0,
+  status: "active",
+};
+
 export const AddClientModal = ({ isShowing, hide, clientAdded }) => {
-  const [values, setValues] = useState({
-    dni: "",
-    name: "",
-    phone: "",
-    email: "",
-    // Estos valores no los usamos en el formulario pero si al crear el cliente
-    points: 0,
-    status: "active",
-  });
+  const [values, setValues] = useState(initialValues);
 
   const [addClient, clientDataAdded, loading, error] = useAddClient();
 
@@ -26,6 +27,7 @@ export const AddClientModal = ({ isShowing, hide, clientAdded }) => {
     if (clientDataAdded !== null) {
       clientAdded(clientDataAdded);
       hide();
+      setValues(initialValues);
     }
   }, [clientDataAdded]);
 
