@@ -6,8 +6,9 @@ export const useAddClient = () => {
   const [clientDataAdded, setClientDataAdded] = useState(null);
 
   const addClient = (newClient) => {
-    setLoading(true);
     if (loading) return;
+    setLoading(true);
+
     let clientsLength = null;
 
     // Primero sacamos cuantos clientes hay ahora mismo

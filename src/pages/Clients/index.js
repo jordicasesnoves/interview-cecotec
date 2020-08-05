@@ -3,9 +3,11 @@ import ReactDOM from "react-dom";
 import { Button, AddClientModal } from "../../components";
 import { useClients } from "../../hooks/useClients";
 import { useModal } from "../../hooks/useModal";
+import { useDeleteClient } from "../../hooks/useDeleteClient";
 
 export const Clients = () => {
   const [loading, getClients, setClients, clients, error] = useClients();
+  const [deleteClient, clientIdDeleted] = useDeleteClient();
 
   const [clientAdded, setClientAdded] = useState(null);
   // Custom hook para mostrar el modal de la pagina
@@ -22,6 +24,15 @@ export const Clients = () => {
       setClients([...clients, clientAdded]);
     }
   }, [clientAdded]);
+
+  // Escuchar cuando se elimina un nuevo cliente
+  useEffect(() => {
+    if (clientIdDeleted !== null) {
+      setClients(clients.filter((client) => client.id !== clientIdDeleted));
+    }
+  }, [clientIdDeleted]);
+
+  useEffect(() => {});
 
   if (error) alert(error.message);
   if (loading) return "Loading...";
@@ -104,6 +115,11 @@ export const Clients = () => {
                           Edit
                         </a>
                         <a
+                          onClick={() =>
+                            window.confirm(`Delete client ${client.id}?`)
+                              ? deleteClient(client.id)
+                              : null
+                          }
                           href="#"
                           className="text-red-600 hover:text-indigo-900"
                         >
@@ -116,6 +132,8 @@ export const Clients = () => {
                 <AddClientModal
                   isShowing={isShowing}
                   hide={toggle}
+                  // Le pasamos al modal (componente hijo) el metodo 'setClientAdded'
+                  // para que nos avise cuando se ha creado un nuevo cliente
                   clientAdded={setClientAdded}
                 />
               </tbody>
