@@ -1,28 +1,25 @@
 import { useEffect, useState } from "react";
 
-export const useAddClient = () => {
+export const useModifyClient = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [clientDataAdded, setClientDataAdded] = useState(null);
+  const [clientModifiedData, setClientModifiedData] = useState(null);
 
-  const addClient = (newClient) => {
+  const modifyClient = (clientId, clientData) => {
     if (loading) return;
     setLoading(true);
 
-    // Anadimos el id del nuevo cliente, el cual esta basado en el momento en el que se crea
-    newClient = { id: new Date().getTime(), ...newClient };
-
     // peticion POST para añadir el nuevo cliente
-    fetch("http://localhost:3001/clients", {
-      method: "POST",
-      body: JSON.stringify(newClient),
+    fetch(`http://localhost:3001/clients/${clientId}`, {
+      method: "PUT",
+      body: JSON.stringify(clientData),
       headers: {
         "Content-Type": "application/json",
       },
     })
       .then((res) => res.json())
       .then((response) => {
-        setClientDataAdded(response);
+        setClientModifiedData(response);
         setLoading(false);
       })
       .catch((err) => {
@@ -31,5 +28,5 @@ export const useAddClient = () => {
       });
   };
 
-  return [addClient, clientDataAdded, loading, error];
+  return [modifyClient, clientModifiedData, loading, error];
 };

@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import { Button, AddClientModal } from "../../components";
+import { Button, AddClientModal, ModifyClientModal } from "../../components";
 import { useClients } from "../../hooks/useClients";
 import { useModal } from "../../hooks/useModal";
 import { useDeleteClient } from "../../hooks/useDeleteClient";
+import { Link } from "react-router-dom";
 
 export const Clients = () => {
   const [loading, getClients, setClients, clients, error] = useClients();
   const [deleteClient, clientIdDeleted] = useDeleteClient();
 
   const [clientAdded, setClientAdded] = useState(null);
-  // Custom hook para mostrar el modal de la pagina
+  const [clientModified, setClientModified] = useState(null);
+
   const { isShowing, toggle } = useModal();
 
   // Pedir datos
@@ -31,8 +33,6 @@ export const Clients = () => {
       setClients(clients.filter((client) => client.id !== clientIdDeleted));
     }
   }, [clientIdDeleted]);
-
-  useEffect(() => {});
 
   if (error) alert(error.message);
   if (loading) return "Loading...";
@@ -56,6 +56,9 @@ export const Clients = () => {
                   </th>
                   <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                     Phone
+                  </th>
+                  <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                    DNI
                   </th>
                   <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                     Status
@@ -93,27 +96,28 @@ export const Clients = () => {
                       </td>
                       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                         <div className="text-sm leading-5 text-gray-900">
-                          {client.phone}
+                          +34 {client.phone}
                         </div>
-                        <div className="text-sm leading-5 text-gray-500">
-                          (Spain)
-                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
+                        {client.dni}
                       </td>
                       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                         <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                           {client.status.toUpperCase()}
                         </span>
                       </td>
+
                       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
                         {client.points}
                       </td>
                       <td className="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
-                        <a
-                          href="#"
+                        <Link
+                          to={`/client/${client.id}/modify`}
                           className="text-indigo-600 hover:text-indigo-900 mr-2"
                         >
-                          Edit
-                        </a>
+                          Modify
+                        </Link>
                         <a
                           onClick={() =>
                             window.confirm(`Delete client '${client.name}'?`)
@@ -129,18 +133,18 @@ export const Clients = () => {
                     </tr>
                   );
                 })}
-                <AddClientModal
-                  isShowing={isShowing}
-                  hide={toggle}
-                  // Le pasamos al modal (componente hijo) el metodo 'setClientAdded'
-                  // para que nos avise cuando se ha creado un nuevo cliente
-                  clientAdded={setClientAdded}
-                />
               </tbody>
             </table>
           </div>
         </div>
       </div>
+      <AddClientModal
+        isShowing={isShowing}
+        hide={toggle}
+        // Le pasamos al modal (componente hijo) el metodo 'setClientAdded'
+        // para que nos avise cuando se ha creado un nuevo cliente
+        clientAdded={setClientAdded}
+      />
     </>
   );
 };
