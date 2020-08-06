@@ -24,7 +24,11 @@ const AuthRoute = ({ ...props }) => {
 };
 
 const ContentContainer = (props) => {
-  return <div className="max-w-6xl mx-auto py-12">{props.children}</div>;
+  return (
+    <div className="max-w-6xl mx-auto py-12 flex-col flex">
+      {props.children}
+    </div>
+  );
 };
 
 // Si el usuario no esta logeado, solo puede acceder a /login

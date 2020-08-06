@@ -1,7 +1,7 @@
 type Product {
-  id: ID! 
+  id: ID! @fake(type: uuid)
   name: String @fake(type: productName)
-  description: String 
+  description: String @fake(type: words)
   price: Float!
 }
 

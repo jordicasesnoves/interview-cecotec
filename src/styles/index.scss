@@ -76,11 +76,6 @@ a {
  * 2. Correct the odd `em` font sizing in all browsers.
  */
 
-code {
-  font-family: monospace, monospace; /* 1 */
-  font-size: 1em; /* 2 */
-}
-
 /**
  * Add the correct font size in all browsers.
  */
@@ -246,7 +241,8 @@ template {
  */
 
 
-h1 {
+h1,
+p {
   margin: 0;
 }
 
@@ -383,11 +379,6 @@ input {
  * back to the system monospace stack if there is no configured
  * 'mono' font family.
  */
-
-
-code {
-  font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-}
 
 /**
  * Make replaced elements `display: block` by default as that's
@@ -718,6 +709,10 @@ img {
   margin-bottom: 1.5rem;
 }
 
+.mb-12 {
+  margin-bottom: 3rem;
+}
+
 .max-w-md {
   max-width: 28rem;
 }
@@ -922,6 +917,12 @@ img {
   --text-opacity: 1;
   color: #b2f5ea;
   color: rgba(178, 245, 234, var(--text-opacity));
+}
+
+.text-blue-500 {
+  --text-opacity: 1;
+  color: #4299e1;
+  color: rgba(66, 153, 225, var(--text-opacity));
 }
 
 .text-indigo-500 {

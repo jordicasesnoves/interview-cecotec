@@ -39,7 +39,7 @@ export const Clients = () => {
 
   return (
     <>
-      <div className="items-center justify-between w-full flex mb-6">
+      <div className="items-center justify-between w-full flex mb-12">
         <h1 className="text-4xl inline">Clients</h1>
         <Button onClick={toggle} className="inline">
           Add Client
